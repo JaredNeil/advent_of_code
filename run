@@ -1,0 +1,5 @@
+#!/bin/bash
+set -euo pipefail
+
+export PYTHONPATH=/home/jaredneil/code/AdventOfCode
+exec python3 "${YEAR}/${DAY}/${1}.py" "${YEAR}/${DAY}/${2:-in.txt}"
