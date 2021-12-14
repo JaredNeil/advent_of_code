@@ -1,7 +1,8 @@
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, deque
 from functools import lru_cache
-from itertools import combinations, permutations, product
+from itertools import combinations, permutations, product, repeat
 
-from util import load_lines, transpose, window_of, cli
+from parse import cli, cls, i, line, load_lines, point, s, table, wli, wls
+from util import chunks_of, make_grid, mul, pp, transpose, window_of
 
-(nums,) = load_lines(cli)
+(lines,) = load_lines(repeat(s))
