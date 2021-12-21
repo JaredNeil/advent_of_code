@@ -1,3 +1,4 @@
+from itertools import tee
 import sys
 from collections.abc import Iterable
 

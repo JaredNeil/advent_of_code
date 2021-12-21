@@ -23,13 +23,17 @@ def chunks_of(size, l):
 def triangular(n):
     return n * (n + 1) // 2
 
-
-pp = PrettyPrinter(
+_pp = PrettyPrinter(
     indent=2,
     width=120,
     stream=sys.stderr,
     compact=True,
-).pprint
+)
+def pp(*args):
+    if len(args) == 1:
+        _pp.pprint(args[0])
+    else:
+        _pp.pprint(args)
 
 
 def mul(iter):
@@ -76,18 +80,18 @@ def make_grid(lines, default=None):
         grid = defaultdict(default)
     for y, l in enumerate(lines):
         for x, c in enumerate(l):
-            grid[x, y] = int(c)
+            grid[x, y] = c
     return grid
 
 
-def extants(grid):
-    xs = [x for x, y in grid]
-    ys = [y for x, y in grid]
+def extants(grid, filter = lambda x: True):
+    xs = [x for x, y in grid if filter(((x,y), grid[x, y]))]
+    ys = [y for x, y in grid if filter(((x,y), grid[x, y]))]
     return ((min(xs), max(xs)), (min(ys), max(ys)))
 
 
-def display(grid, default=" "):
-    ((min_x, max_x), (min_y, max_y)) = extants(grid)
+def display(grid, default=" ", filter=lambda x: True):
+    ((min_x, max_x), (min_y, max_y)) = extants(grid, filter)
     for y in range(min_y, max_y + 1):
         for x in range(min_x, max_x + 1):
             print(grid.get((x, y), default), end="")
