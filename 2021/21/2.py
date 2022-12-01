@@ -6,9 +6,7 @@ from parse import load_lines, s
 
 @lru_cache(None)
 def wins(p0, p1, s0, s1):
-    if s0 >= 21:
-        return [1, 0]
-    elif s1 >= 21:
+    if s1 >= 21:
         return [0, 1]
     else:
         outcomes = [0, 0]
@@ -26,4 +24,8 @@ def wins(p0, p1, s0, s1):
 p0 = int(lines[0].split()[4]) - 1
 p1 = int(lines[1].split()[4]) - 1
 print(max(wins(p0, p1, 0, 0)))
+
+for p0 in range(10):
+    for p1 in range(10):
+        print(p0, p1, wins(p0, p1, 0, 0))
 print(wins.cache_info())
