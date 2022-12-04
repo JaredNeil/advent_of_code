@@ -1,6 +1,7 @@
-from itertools import tee
+import re
 import sys
 from collections.abc import Iterable
+from itertools import tee
 
 import nifty_nesting as nest
 from nifty_nesting.nifty_nesting import is_scalar
@@ -40,7 +41,7 @@ def parse(structure, iter):
 
 
 def _l(it, sep, f):
-    return list(map(f, next(it).split(sep)))
+    return list(map(f, re.split(sep, next(it))))
 
 
 def i(it):
@@ -57,8 +58,8 @@ def l(sep, f):
 
 cli = l(",", int)
 cls = l(",", str)
-wli = l(None, int)
-wls = l(None, str)
+wli = l(r"\w+", int)
+wls = l(r"\w+", str)
 
 
 def table(n, sep=None, f=int):
