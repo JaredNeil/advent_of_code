@@ -33,7 +33,10 @@ def parse(structure, iter):
                 parsed.append(val(iter))
     except StopIteration:
         pass
-    return nest.pack_list_into(structure, parsed)
+    if parsed:
+        return nest.pack_list_into(structure, parsed)
+    else:
+        raise StopIteration
 
 
 def _l(it, sep, f):
